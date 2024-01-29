@@ -1,0 +1,30 @@
+<div class="login">
+    <div class="login_box">
+        <form #l="ngForm" (ngSubmit)="doSubmit(l)" class="login_content">
+            <div class="heading">LOGIN</div>
+            <div class="form_field">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email ID</mat-label>
+                    <input matInput [(ngModel)]="loginData.username" name="username" required type="email" [pattern]="emailPattern">
+                </mat-form-field>
+            </div>
+            <div class="form_field">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput [(ngModel)]="loginData.password" name="password" required #password="ngModel" [pattern]="passwordPattern" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button class="login_btn" type="submit" [disabled]="!l.form.valid">LOGIN</button>
+            <div class="d-flex align-items-center justify-content-center pt-4 c_text">
+                <small class="me-auto">Create a new account ?</small>
+                <small>Forgot Password ?</small>
+            </div>
+            <div class="d-flex align-items-center justify-content-center pt-3">
+                <small>Copyright 2024 @ Provision Store</small>
+            </div>
+        </form>
+    </div>
+</div>

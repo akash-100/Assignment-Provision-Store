@@ -1,0 +1,19 @@
+<div class="v-flex w100 h100">
+    <div class="header">
+        <div class="logo pe-5">
+            <img src="assets/images/pro.png">
+        </div>
+        <div class="ps-5">
+            <span [ngClass]="{'active' : !active}" (click)="navigate('home')">Home</span>
+            <span (click)="navigate('about')" [ngClass]="{'active' : active}">About</span>
+            <span>Contact</span>
+            <span>Help ?</span>
+        </div>
+    </div>
+    <div class="header_img">
+        <!-- <img src="assets/images/bg.JPG"> -->
+    </div>
+    <div class="flex-1 d-flex overflow-auto w100 h100">
+        <router-outlet></router-outlet>
+    </div>
+</div>

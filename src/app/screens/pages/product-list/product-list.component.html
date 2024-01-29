@@ -1,0 +1,76 @@
+<div class="product_content">
+    <div class="search_panel">
+        <mat-form-field class="example-form-field w100">
+            <mat-label>Search here by product name</mat-label>
+            <input matInput type="text" [(ngModel)]="searchedValue" name="searchedValue" (ngModelChange)="getsearchedList()">
+            <button *ngIf="searchedValue && searchedValue != ''" matSuffix mat-icon-button aria-label="Clear" (click)="doClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="container-fluid" *ngIf="productData && productData.length > 0">
+        <div class="row">
+            <div class="col-3 px-4 pb-5" *ngFor="let p_Data of productData; index as i">
+                <mat-card class="v-flex product_card">
+                    <mat-card-content class="h100 v-flex">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="offer" *ngIf="p_Data.offer">
+                                Offer 10%
+                            </div>
+                            <div class="ms-auto">
+                                <button mat-icon-button matSuffix (click)="p_Data.fav = !p_Data.fav" class="fav">
+                                    <mat-icon>{{p_Data.fav ? 'favorite' : 'favorite_border'}}</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center flex-1">
+                            <div class="me-auto">
+                                <div class="product_name">
+                                    {{p_Data.productCategory.productCategoryName}}
+                                </div>
+                                <small>500g</small>
+                                <div class="price">Rs.{{ p_Data.offer ? getOriginalRate(p_Data.price) : p_Data.price}}
+                                    <del *ngIf="p_Data.offer">Rs.{{p_Data.price}}</del>
+                                </div>
+                            </div>
+                            <div class="product_img">
+                                <img [src]="p_Data.productCategory.productCategoryImage"
+                                    [alt]="p_Data.productCategory.productCategoryName">
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center pt-3">
+                            <div class="ratings">
+                                <ng-container *ngFor="let r_Data of getNRData(p_Data.ratings)">
+                                    <mat-icon>star_border</mat-icon>
+                                </ng-container>
+                                <ng-container *ngFor="let r_Data of getRData(p_Data.ratings)">
+                                    <mat-icon>star</mat-icon>
+                                </ng-container>
+                            </div>
+                            <div class="banner ms-auto d-flex align-items-center justify-content-center">
+                                <ng-container
+                                    *ngIf="p_Data.productCategory.wholeSale && !p_Data.productCategory.retail">Whole
+                                    Sale
+                                </ng-container>
+                                <ng-container
+                                    *ngIf="!p_Data.productCategory.wholeSale && p_Data.productCategory.retail">Retail
+                                </ng-container>
+                                <ng-container
+                                    *ngIf="p_Data.productCategory.wholeSale && p_Data.productCategory.retail">Retail &
+                                    Whole
+                                    Sale
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center pt-3">
+                            <button mat-raised-button class="cart cursor-pointer">
+                                <mat-icon class="me-2">shopping_cart</mat-icon>
+                                Add to cart
+                            </button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

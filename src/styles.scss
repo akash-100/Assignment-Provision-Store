@@ -1,0 +1,105 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$Provision-Store-primary: mat.define-palette(mat.$indigo-palette);
+$Provision-Store-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$Provision-Store-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$Provision-Store-theme: mat.define-light-theme((
+  color: (
+    primary: $Provision-Store-primary,
+    accent: $Provision-Store-accent,
+    warn: $Provision-Store-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($Provision-Store-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import "./assets/scss/login.scss";
+@import "./assets/scss/pages.scss";
+
+* {
+  &:focus {
+    outline: 0;
+  }
+}
+
+.h100 {
+  height: 100% !important;
+}
+
+.w100 {
+  width: 100% !important;
+}
+
+.vertical-flex,
+.v-flex {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.ab {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.rel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 2;
+}
+
+app-product-list{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.overflow-auto {
+  overflow: auto !important;
+}
